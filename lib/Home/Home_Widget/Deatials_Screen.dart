@@ -15,6 +15,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as Results;
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -120,12 +121,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (_, index) {
-                                var datavar = data?.results![index];
+                                var datavar = data?.results![index] as Results;
                                 return InkWell(
                                   onTap: () {
-                                    setState(() {
-
-                                    });
+                                    Navigator.pushReplacementNamed(context,DetailsScreen.routename,arguments:data?.results![index]  );
                                   },
                                   child: Container(
                                     height: 220,

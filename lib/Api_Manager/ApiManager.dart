@@ -37,7 +37,20 @@ class ApiManager {
     ResponHeader responsHeader = ResponHeader.fromJson(json);
     return responsHeader;
   }
+  static Future<ResponHeader> getResponsSearch(String query) async {
+    //https://api.themoviedb.org/3/search/movie?api_key=f9913dcdc3e455726868be0993e170fa&language=en-US&page=1&include_adult=false
+    var authority = 'api.themoviedb.org';
+    var api_key = 'f9913dcdc3e455726868be0993e170fa';
+
+    var url = Uri.https(authority, '/3/search/movie',
+        {'api_key': api_key, 'language': 'en-US', 'page': '1','query':query});
+    var respons = await http.get(url);
+    var json = jsonDecode(respons.body);
+    ResponHeader responsHeader = ResponHeader.fromJson(json);
+    return responsHeader;
+  }
 }
+
 //https://api.themoviedb.org/3/movie/latest?api_key=<<api_key>>&language=en-US
 //https://api.themoviedb.org/3/movie/popular?api_key=f9913dcdc3e455726868be0993e170fa&language=en-US&page=1
 //https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1

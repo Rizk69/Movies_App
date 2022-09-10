@@ -19,7 +19,6 @@ class HaderDeateils extends StatelessWidget {
             } else if (snapShot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else {
-
               var data = snapShot.data;
               return Column(
                 children: [
@@ -28,8 +27,14 @@ class HaderDeateils extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Image.network(
-                              'https://image.tmdb.org/t/p/w500/${data?.results![indexselect].backdropPath}'),
+                          CachedNetworkImage(
+                            imageUrl:
+                                'https://image.tmdb.org/t/p/w500/${data?.results![indexselect].backdropPath}',
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                           Text(
                             '${data?.results![indexselect].title}',
                             style: TextStyle(color: Colors.white, fontSize: 16),
@@ -47,9 +52,16 @@ class HaderDeateils extends StatelessWidget {
                         left: 20,
                         width: 129,
                         height: 199,
-                        child: Image.network(
+                        child:
+                        CachedNetworkImage(
+                          imageUrl:
                           'https://image.tmdb.org/t/p/w500/${data?.results![indexselect].posterPath}',
+                          placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                         ),
+
                       )
                     ],
                   ),
