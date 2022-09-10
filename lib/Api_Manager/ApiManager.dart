@@ -25,13 +25,13 @@ class ApiManager {
     ResponHeader responsHeader = ResponHeader.fromJson(json);
     return responsHeader;
   }
-  static Future<ResponHeader> getResponsSimailar() async {
-
+  static Future<ResponHeader> getResponsSimailar(int id) async {
+//https://api.themoviedb.org/3/movie/610150/similar?api_key=f9913dcdc3e455726868be0993e170fa&movie_id=610150
     var authority = 'api.themoviedb.org';
     var api_key = 'f9913dcdc3e455726868be0993e170fa';
 
-    var url = Uri.https(authority, '/3/movie/top_rated',
-        {'api_key': api_key, 'language': 'en-US', 'page': '1',});
+    var url = Uri.https(authority, '/3/movie/$id/similar',
+        {'api_key': api_key, 'language': 'en-US', 'page': '1','movie_id':'$id'});
     var respons = await http.get(url);
     var json = jsonDecode(respons.body);
     ResponHeader responsHeader = ResponHeader.fromJson(json);

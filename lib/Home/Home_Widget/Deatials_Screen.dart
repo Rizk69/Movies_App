@@ -89,7 +89,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
             ),
             FutureBuilder<ResponHeader>(
-                future: ApiManager.getResponsSimailar(),
+                future: ApiManager.getResponsSimailar(args.id ?? 610150),
                 builder: (buildContext, snapShot) {
                   if (snapShot.hasError) {
                     return Text(' error: ${snapShot.error}',
