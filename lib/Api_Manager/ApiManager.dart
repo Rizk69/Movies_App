@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import '../ResponsData/browser.dart';
+import '../ResponsData/category.dart';
 import '../ResponsData/respon_header.dart';
 
 class ApiManager {
@@ -44,6 +47,30 @@ class ApiManager {
 
     var url = Uri.https(authority, '/3/search/movie',
         {'api_key': api_key, 'language': 'en-US', 'page': '1','query':query});
+    var respons = await http.get(url);
+    var json = jsonDecode(respons.body);
+    ResponHeader responsHeader = ResponHeader.fromJson(json);
+    return responsHeader;
+  }
+  static Future<CategoryData> getResponsCategory() async {
+    //https://api.themoviedb.org/3/genre/movie/list?api_key=f9913dcdc3e455726868be0993e170fa&language=en-US
+    var authority = 'api.themoviedb.org';
+    var api_key = 'f9913dcdc3e455726868be0993e170fa';
+
+    var url = Uri.https(authority, '/3/genre/movie/list',
+        {'api_key': api_key, 'language': 'en-US'});
+    var respons = await http.get(url);
+    var json = jsonDecode(respons.body);
+    CategoryData responsHeader = CategoryData.fromJson(json);
+    return responsHeader;
+  }
+
+  static Future<ResponHeader> getResponsCategoryDateails(String id) async {
+    //https://api.themoviedb.org/3/discover/movie?api_key=f9913dcdc3e455726868be0993e170fa&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
+    var authority = 'api.themoviedb.org';
+    var api_key = 'f9913dcdc3e455726868be0993e170fa';
+    var url = Uri.https(authority, '/3/discover/movie',
+        {'api_key': api_key, 'language': 'en-US', 'sort_by':id });
     var respons = await http.get(url);
     var json = jsonDecode(respons.body);
     ResponHeader responsHeader = ResponHeader.fromJson(json);

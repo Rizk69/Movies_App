@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movise/Home/Browser_Widget/BrowserDateails.dart';
 import 'package:movise/Home/Home_Screen.dart';
 import 'package:movise/Home/Home_Widget/Deatials_Screen.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routenamed,
       routes: {
         HomeScreen.routenamed :(_)=> HomeScreen(),
-        DetailsScreen.routename:(_)=> DetailsScreen()
+        DetailsScreen.routename:(_)=> DetailsScreen(),
+        BrowserDateails.routename:(_)=>BrowserDateails()
       },
     );
   }

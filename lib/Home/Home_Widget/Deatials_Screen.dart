@@ -29,8 +29,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(
-                'https://image.tmdb.org/t/p/w500/${args.backdropPath}'),
+            CachedNetworkImage(
+              imageUrl:
+        'https://image.tmdb.org/t/p/w500/${args.backdropPath}',
+              placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+              const Icon(Icons.error),
+            ),
+
             Container(
               padding: EdgeInsets.all(15),
               child: Column(
@@ -55,9 +62,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Container(
                         width: 130,
                         height: 200,
-                        child: Image.network(
+                        child: CachedNetworkImage(
+                          imageUrl:
                           'https://image.tmdb.org/t/p/w500/${args.posterPath}',
-                        ),
+                          placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                        )
+
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -102,7 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     var data = snapShot.data;
                     return Container(
                       padding: EdgeInsets.only(top: 15, left: 8),
-                      height: 246,
+
                       color: Color(0XFF282A28),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -116,18 +129,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                           Container(
                             padding: EdgeInsets.only(top: 10),
-                            height: 200,
+                            height: 240,
                             width: 100,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (_, index) {
-                                var datavar = data?.results![index] as Results;
+
                                 return InkWell(
                                   onTap: () {
                                     Navigator.pushReplacementNamed(context,DetailsScreen.routename,arguments:data?.results![index]  );
                                   },
                                   child: Container(
-                                    height: 220,
+                                    height: 240,
                                     width: 100,
                                     padding: EdgeInsets.only(left: 5, right: 5),
                                     child: Column(

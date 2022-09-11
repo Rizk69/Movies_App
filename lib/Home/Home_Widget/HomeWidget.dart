@@ -29,13 +29,14 @@ class _HomeWidgetState extends State<HomeWidget> {
               } else {
 
                 var data = snapShot.data;
-                return InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, DetailsScreen.routename,arguments:data?.results![indexselect]);
-                  },
-                  child: Column(
-                    children: [
-                      Stack(
+                return Column(
+                  children: [
+                    InkWell(
+                     onTap: (){
+                       Navigator.pushNamed(context, DetailsScreen.routename,arguments:data?.results![indexselect]);
+
+                     },
+                      child: Stack(
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,70 +66,70 @@ class _HomeWidgetState extends State<HomeWidget> {
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 15, left: 8),
-                        height: 190,
-                        color: Color(0XFF282A28),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              'New Releases',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 15, left: 8),
+                      height: 190,
+                      color: Color(0XFF282A28),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'New Releases',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
 
-                                height: 145,
-                                padding: EdgeInsets.only(top: 8),
-                                child: ListView.builder(
-                                  padding: EdgeInsets.only(
-                                      bottom: 10, left: 5, right: 5),
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (_, index) {
+                              height: 145,
+                              padding: EdgeInsets.only(top: 8),
+                              child: ListView.builder(
+                                padding: EdgeInsets.only(
+                                    bottom: 10, left: 5, right: 5),
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (_, index) {
 
-                                    return InkWell(
-                                      onTap: (){
-                                        indexselect=index;
-                                        setState(() {
-                                        });
+                                  return InkWell(
+                                    onTap: (){
+                                      indexselect=index;
+                                      setState(() {
+                                      });
 
 
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(left: 5, right: 5),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(7),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                            'https://image.tmdb.org/t/p/w500/${data?.results![index].posterPath}',
-                                            placeholder: (context, url) => Center(
-                                                child: CircularProgressIndicator()),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error),
-                                          ),
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 5, right: 5),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(7),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                          'https://image.tmdb.org/t/p/w500/${data?.results![index].posterPath}',
+                                          placeholder: (context, url) => Center(
+                                              child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
                                         ),
                                       ),
-                                    );
-                                  },
-                                  itemCount: data?.results?.length,
-                                ))
-                          ],
-                        ),
+                                    ),
+                                  );
+                                },
+                                itemCount: data?.results?.length,
+                              ))
+                        ],
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 );
               }
             }),
