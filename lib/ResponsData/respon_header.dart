@@ -17,10 +17,9 @@ class ResponHeader {
         results?.add(Results.fromJson(v));
       });
     }
-    success= json["success"];
-    status_message= json["status_message"];
+    success = json["success"];
+    status_message = json["status_message"];
   }
-
 }
 
 /// adult : false
@@ -62,7 +61,7 @@ class Results {
     originalLanguage = json["original_language"];
     originalTitle = json["original_title"];
     overview = json["overview"];
-     popularity = json["popularity"];
+    popularity = json["popularity"];
     posterPath = json["poster_path"];
     releaseDate = json["release_date"];
     title = json["title"];

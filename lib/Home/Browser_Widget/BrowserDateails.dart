@@ -5,6 +5,7 @@ import 'package:movise/Api_Manager/ApiManager.dart';
 import '../../ResponsData/category.dart';
 import '../../ResponsData/respon_header.dart';
 import '../Home_Widget/Deatials_Screen.dart';
+import 'CataegrDateils.dart';
 
 class BrowserDateails extends StatelessWidget {
   static const String routename='BDea';
@@ -43,91 +44,9 @@ class BrowserDateails extends StatelessWidget {
                   if (data?.success == 'false') {
                     return Center(child: Text('${data?.status_message}'));
                   }
-                  return Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (_, index) {
-                        return InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, DetailsScreen.routename,arguments:data?.results![index]);
-                          },
-                          child:Container(
+                  return CataegrDateils((snapShot.data?.results)!);
 
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black54,
-                                      offset: Offset(0,1)
-                                  )
-                                ],
-                                color: Colors.black38,
-                              borderRadius: BorderRadius.only(topLeft:Radius.circular(50) ,bottomRight:Radius.circular(50) )
-                            ),
-                            padding: EdgeInsets.only(top: 30,bottom: 30,left: 20,right: 20),
-                            margin: EdgeInsets.only(bottom: 10),
-                            width: double.infinity,
-                            height: 150,
-                            child: Row(
-                              children: [
-
-                                ClipRRect(
-                                  borderRadius:
-                                  BorderRadius.circular(9),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                    'https://image.tmdb.org/t/p/w500/${data?.results![index].posterPath}',
-                                    placeholder: (context, url) =>
-                                    const Center(
-                                        child:
-                                        CircularProgressIndicator()),
-                                    errorWidget:
-                                        (context, url, error) =>
-                                    const Icon(Icons.error),
-                                  ),
-                                ),
-                                Spacer(),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-
-                                      children: [
-                                        SizedBox(
-                                          width: 200,
-                                          child: Text(
-                                            '${data?.results![index].originalTitle}',
-                                             style: TextStyle(fontSize: 18,color: Colors.white),
-                                          ),
-                                        ),
-
-                                    SizedBox(
-                                      height: 5,
-
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.star,
-                                            color: Color(0XFFFFBB3B), size: 25),
-                                        Text(' ${data?.results![index].voteAverage}',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold)),
-                                      ],
-                                    )
-                                  ]),
-                                )
-
-
-                              ],
-                            ),
-                          ) ,
-                        ); },
-                      itemCount: (data?.results?.length)!,
-
-                    ),
-                  );
+                    ;
                 }),
           ],
         ),

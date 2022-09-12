@@ -3,8 +3,7 @@
 class CategoryData {
   List<Genres>? genres;
 
-  CategoryData({
-      this.genres});
+  CategoryData({this.genres});
 
   CategoryData.fromJson(dynamic json) {
     if (json["genres"] != null) {
@@ -22,7 +21,6 @@ class CategoryData {
     }
     return map;
   }
-
 }
 
 /// id : 28
@@ -32,9 +30,7 @@ class Genres {
   int? id;
   String? name;
 
-  Genres({
-      this.id, 
-      this.name});
+  Genres({this.id, this.name});
 
   Genres.fromJson(dynamic json) {
     id = json["id"];
@@ -47,5 +43,4 @@ class Genres {
     map["name"] = name;
     return map;
   }
-
 }

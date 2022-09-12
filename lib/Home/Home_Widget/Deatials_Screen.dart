@@ -14,6 +14,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    bool click = true;
     var args = ModalRoute.of(context)?.settings.arguments as Results;
 
     return Scaffold(
@@ -29,49 +30,107 @@ class _DetailsScreenState extends State<DetailsScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl:
-        'https://image.tmdb.org/t/p/w500/${args.backdropPath}',
-              placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) =>
-              const Icon(Icons.error),
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 270,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(80)),
+                    child: CachedNetworkImage(
+                      alignment: Alignment.topCenter,
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/w500/${args.backdropPath}',
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    alignment: AlignmentDirectional.centerEnd,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0XFF282A63), offset: Offset(0, 1))
+                        ],
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                            topLeft: Radius.circular(50)),
+                        color: Color(0XFF282A28)),
+                    width: 270,
+                    height: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15, left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${args.originalTitle}',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '${args.releaseDate}',
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                                fontSize: 10, color: Color(0XFFB5B4B4)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(Icons.star,
+                                    color: Color(0XFFFFBB3B), size: 15),
+                                Text(' ${args.voteAverage}',
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-
             Container(
               padding: EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${args.originalTitle}',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '${args.releaseDate}',
-                    style: TextStyle(fontSize: 10, color: Color(0XFFB5B4B4)),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
                   Row(
                     children: [
                       Container(
-                        width: 130,
-                        height: 200,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                          'https://image.tmdb.org/t/p/w500/${args.posterPath}',
-                          placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                        )
-
-                      ),
+                          width: 130,
+                          height: 200,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://image.tmdb.org/t/p/w500/${args.posterPath}',
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          )),
                       Container(
                         padding: EdgeInsets.all(10),
                         width: 231,
@@ -84,17 +143,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          Row(
-                            children: [
-                              Icon(Icons.star,
-                                  color: Color(0XFFFFBB3B), size: 25),
-                              Text(' ${args.voteAverage}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          )
                         ]),
                       )
                     ],
@@ -115,7 +163,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     var data = snapShot.data;
                     return Container(
                       padding: EdgeInsets.only(top: 15, left: 8),
-
                       color: Color(0XFF282A28),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -134,10 +181,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (_, index) {
-
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.pushReplacementNamed(context,DetailsScreen.routename,arguments:data?.results![index]  );
+                                    Navigator.pushReplacementNamed(
+                                        context, DetailsScreen.routename,
+                                        arguments: data?.results![index]);
                                   },
                                   child: Container(
                                     height: 240,
@@ -147,23 +195,57 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          height: 120,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  'https://image.tmdb.org/t/p/w500/${data?.results![index].posterPath}',
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                      child:
-                                                          CircularProgressIndicator()),
-                                              errorWidget:
-                                                  (context, url, error) =>
+                                        Stack(
+                                          children: [
+                                            Container(
+                                              height: 120,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(9),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      'https://image.tmdb.org/t/p/w500/${data?.results![index].posterPath}',
+                                                  placeholder: (context, url) =>
+                                                      const Center(
+                                                          child:
+                                                              CircularProgressIndicator()),
+                                                  errorWidget: (context, url,
+                                                          error) =>
                                                       const Icon(Icons.error),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            InkWell(
+                                              onTap: () {
+                                                click = !click;
+                                                setState(() {});
+                                              },
+                                              child: Container(
+                                                height: 36,
+                                                width: 27,
+                                                decoration: BoxDecoration(
+                                                  color: click
+                                                      ? Color(0XFF514F4F)
+                                                          .withOpacity(0.5)
+                                                      : Color(0XFFF7B539),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  8)),
+
+                                                ),
+                                                child: Center(
+                                                    child: Icon(
+                                                  click
+                                                      ? Icons.add
+                                                      : Icons.check,
+                                                  color: Colors.white,
+                                                  size: 15,
+                                                )),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                         Row(
                                           children: [
