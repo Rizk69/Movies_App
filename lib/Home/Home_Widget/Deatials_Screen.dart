@@ -57,7 +57,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: Color(0XFF282A63), offset: Offset(0, 1))
+                              color: Colors.white70, offset: Offset(4, 6),spreadRadius: 0,blurRadius: 12,)
                         ],
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(50),
@@ -131,20 +131,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   const Icon(Icons.error),
                             ),
                           )),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        width: 231,
-                        child: Column(children: [
-                          Text(
-                            '${args.overview}',
-                            style: TextStyle(
-                                fontSize: 13, color: Color(0XFFCBCBCB)),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                        ]),
-                      )
+                      Flex(
+                          direction: Axis.horizontal,
+                        children: [Column(
+                          children: [
+                            Container(
+
+                              width: 231,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(maxLines:10 ,softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+
+                                 '${args.overview}',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Color(0XFFCBCBCB)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]), SizedBox(
+                        height: 5,
+                      ),
                     ],
                   )
                 ],
@@ -230,9 +239,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                       : Color(0XFFF7B539),
                                                   borderRadius:
                                                       const BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  8)),
+                                                          bottomLeft:Radius.circular(8) ,
+                                                          topLeft: Radius.circular(8),
+                                                          bottomRight: Radius.circular(8)),
 
                                                 ),
                                                 child: Center(

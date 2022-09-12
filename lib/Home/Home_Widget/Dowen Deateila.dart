@@ -72,7 +72,10 @@ class _DownDetailsState extends State<DownDetails> {
                                   color: Color(0XFF514F4F).withOpacity(0.5),
 
                                   borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(8)),
+                                    bottomLeft:Radius.circular(8) ,
+                                      topLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8)
+                                  ),
                                   // border: Border(
                                   //   bottom: BorderSide(
                                   //     color: Colors.black,

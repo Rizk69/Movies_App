@@ -18,37 +18,39 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FutureBuilder<ResponHeader>(
-            future: ApiManager.getResponsHeader(),
-            builder: (buildContext, snapShot) {
-              if (snapShot.hasError) {
-                return Text(' error: ${snapShot.error}',
-                    style: TextStyle(color: Colors.white));
-              } else if (snapShot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else {
-                var data = snapShot.data;
-                return HaderDeateils((data?.results)!) ;
-              }
-            }),
-        FutureBuilder<ResponHeader>(
-            future: ApiManager.getResponsTopRated(),
-            builder: (buildContext, snapShot) {
-              if (snapShot.hasError) {
-                return Text(' error: ${snapShot.error}',
-                    style: TextStyle(color: Colors.white));
-              } else if (snapShot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          FutureBuilder<ResponHeader>(
+              future: ApiManager.getResponsHeader(),
+              builder: (buildContext, snapShot) {
+                if (snapShot.hasError) {
+                  return Text(' error: ${snapShot.error}',
+                      style: TextStyle(color: Colors.white));
+                } else if (snapShot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  var data = snapShot.data;
+                  return HaderDeateils((data?.results)!) ;
+                }
+              }),
+          FutureBuilder<ResponHeader>(
+              future: ApiManager.getResponsTopRated(),
+              builder: (buildContext, snapShot) {
+                if (snapShot.hasError) {
+                  return Text(' error: ${snapShot.error}',
+                      style: TextStyle(color: Colors.white));
+                } else if (snapShot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
 
-                var data = snapShot.data;
+                  var data = snapShot.data;
 
-                return DownDetails((data?.results)!);
-              }
-            })
-      ],
+                  return DownDetails((data?.results)!);
+                }
+              })
+        ],
+      ),
     );
   }
 }
