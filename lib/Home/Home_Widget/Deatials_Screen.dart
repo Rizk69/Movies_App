@@ -35,36 +35,46 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 270,
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(80)),
-                    child: CachedNetworkImage(
-                      alignment: Alignment.topCenter,
-                      imageUrl:
-                          'https://image.tmdb.org/t/p/w500/${args.backdropPath}',
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
+                  height: 260,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      ClipRRect(
+
+                        borderRadius:
+                            BorderRadius.only(bottomLeft: Radius.circular(60)),
+                        child: CachedNetworkImage(
+
+                          alignment: Alignment.topCenter,
+                          height:double.infinity,
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500/${args.backdropPath}',
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ),
+                      Image.asset('images/play-button-2.png')
+                    ],
                   ),
                 ),
                 Positioned(
+
                   bottom: 0,
                   child: Container(
                     alignment: AlignmentDirectional.centerEnd,
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.white70, offset: Offset(4, 6),spreadRadius: 0,blurRadius: 12,)
+                              color: Colors.white70, offset: Offset(1, 4),spreadRadius: 0,blurRadius: 12,)
                         ],
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(50),
                             topLeft: Radius.circular(50)),
                         color: Color(0XFF282A28)),
                     width: 270,
-                    height: 80,
+                    height: 75,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 15, left: 8),
                       child: Column(

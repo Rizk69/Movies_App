@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed, // Fixed
-          backgroundColor: Color(0XFF1A1A1A), // <-- This works for fixed
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color(0XFF1A1A1A),
           selectedItemColor: Color(0XFFFFBB3B),
           unselectedItemColor: Color(0XFFB5B4B4),
           currentIndex: selectindex,

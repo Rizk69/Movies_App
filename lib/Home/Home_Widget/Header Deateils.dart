@@ -29,8 +29,14 @@ class _HaderDeateilsState extends State<HaderDeateils> {
               Column(
 
                 children: [
-                  Image.network(
-                      'https://image.tmdb.org/t/p/w500/${widget.results[indexselect].backdropPath}'),
+                  Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.network(
+                          'https://image.tmdb.org/t/p/w500/${widget.results[indexselect].backdropPath}'),
+                      Image.asset('images/play-button-2.png')
+                    ],
+                  ),
                   Container(
                     padding: EdgeInsets.only(right: 15,top: 15),
                     child: Column(
